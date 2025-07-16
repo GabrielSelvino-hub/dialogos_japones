@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const dialogos = [
         {
             nome: "Diálogo 001",
-            pasta: "dialogo_001"
+            pasta: "dialogos/dialogo_001"
         },
         {
             nome: "Diálogo 002",
-            pasta: "dialogo_002"
+            pasta: "dialogos/dialogo_002"
         }
         // Adicione mais objetos de diálogo aqui conforme necessário
     ];
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ESTADO DA APLICAÇÃO ---
     let dialogoAtualIndex = -1;
-    let idiomaAtual = 'traducao'; // 'traducao' ou 'japones'
+    let idiomaAtual = 'japones'; // 'traducao' ou 'japones'
     let tipoJaponesAtual = 0; // 0: japones, 1: japones_sem_kanji, 2: romaji
     const tiposJapones = ['japones', 'japones_sem_kanji', 'romaji'];
     const nomesTiposJapones = ['Kanji', 'Hiragana/Kana', 'Romaji'];
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         imgElement.src = `${dialogo.pasta}/imagem.png`;
         imgElement.alt = `Imagem para ${dialogo.nome}`;
 
-        // Reseta para o estado inicial (tradução)
-        idiomaAtual = 'traducao';
+        // Reseta para o estado inicial (japonês com kanji)
+        idiomaAtual = 'japones';
         tipoJaponesAtual = 0;
 
         // Carrega todos os textos
@@ -94,11 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
      * Atualiza a aparência e o texto dos botões.
      */
     function atualizarBotoes() {
-         if (dialogoAtualIndex === -1) {
+        if (dialogoAtualIndex === -1) {
             containerPrincipal.classList.add('hidden');
+            btnAlternarIdioma.classList.add('hidden');
+            btnAlternarJapones.classList.add('hidden');
             return;
         }
         containerPrincipal.classList.remove('hidden');
+        btnAlternarIdioma.classList.remove('hidden');
 
         if (idiomaAtual === 'traducao') {
             btnAlternarIdioma.textContent = 'Mostrar Japonês';
@@ -165,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZAÇÃO ---
     popularNavegacao();
-    atualizarBotoes(); // Esconde o container principal no início
+    atualizarBotoes(); // Mostra os botões desde o início
     // Se houver diálogos, já seleciona o primeiro
     if (dialogos.length > 0) {
         carregarDialogo(0);

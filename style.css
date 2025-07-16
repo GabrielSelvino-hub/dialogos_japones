@@ -46,16 +46,25 @@ header {
 
 #container-principal {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 32px;
     padding: 60px 20px;
     max-width: 1100px;
     margin: 40px auto 0 auto;
     background: rgba(30,32,34,0.85);
     border-radius: 18px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+
+.conteudo-dialogo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
 }
 
 #dialogo-imagem {
@@ -90,10 +99,12 @@ header {
 
 #controles {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 18px;
     align-items: center;
-    margin: 0 10px;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
 }
 
 #controles button {
@@ -150,6 +161,10 @@ header {
 }
 
 @media (max-width: 900px) {
+    .conteudo-dialogo {
+        flex-direction: column;
+        gap: 28px;
+    }
     #container-principal {
         flex-direction: column;
         gap: 28px;
