@@ -1,1 +1,12 @@
-Hai, genki desu, arigatō. Suzuki-san wa. 
+B: Irasshaimase. Nanmei-sama desu ka?
+A: Hitori desu.
+B: Kochira no kauntā-seki e dōzo. Menyū desu.
+A: Arigatō gozaimasu. Osusume wa nan desu ka?
+B: Kyō no ranchi wa tonkatsu teishoku desu. Ninki desu yo.
+A: Jā, sore o hitotsu onegai shimasu.
+B: Kashikomarimashita. Onomimono wa ikaga nasaimasu ka?
+A: Tsumetai ocha o kudasai.
+B: Shōchi itashimashita. Shōshō omachi kudasaimase.
+A: Sumimasen, otearai wa doko desu ka?
+B: Achira no oku ni gozaimasu.
+A: Dōmo.

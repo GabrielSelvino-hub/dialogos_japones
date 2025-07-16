@@ -1,1 +1,12 @@
-Sim, estou bem, obrigado. E você, Suzuki? 
+B: Bem-vindo(a). Para quantas pessoas?
+A: Para uma pessoa.
+B: Por aqui, para o assento no balcão, por favor. Aqui está o cardápio.
+A: Obrigado(a). Qual é a recomendação?
+B: O almoço de hoje é o combo de tonkatsu (lombo de porco à milanesa). É popular.
+A: Então, eu gostaria de um desse, por favor.
+B: Certamente. O que gostaria de beber?
+A: Chá gelado, por favor.
+B: Entendido. Por favor, aguarde um momento.
+A: Com licença, onde fica o banheiro?
+B: Fica lá no fundo.
+A: Obrigado(a).
