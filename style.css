@@ -68,6 +68,16 @@ header {
     max-width: 1200px;
 }
 
+.imagem-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 #dialogo-imagem {
     max-width: 380px;
     min-width: 220px;
@@ -77,9 +87,10 @@ header {
     box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     background: #232526;
     min-height: 260px;
-    object-fit: cover;
+    object-fit: contain;
     border: 2px solid #333;
     flex-shrink: 0;
+    display: block;
 }
 
 #dialogo-texto {
@@ -91,7 +102,7 @@ header {
     background: rgba(40,42,54,0.98);
     min-height: 260px;
     font-size: 1.25rem;
-    line-height: 1.7;
+    line-height: 2.2;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -103,6 +114,11 @@ header {
     /* Scrollbar estilizada */
     scrollbar-width: thin;
     scrollbar-color: #444 #232526;
+}
+#dialogo-texto br {
+    display: block;
+    margin-bottom: 0.7em;
+    content: "";
 }
 
 #dialogo-texto::-webkit-scrollbar {
@@ -201,12 +217,24 @@ header {
         flex-direction: column;
         gap: 28px;
         max-width: 98vw;
+        align-items: center;
     }
-    #dialogo-imagem, #dialogo-texto {
-        max-width: 98vw;
+    .imagem-container {
+        padding: 0;
+    }
+    #dialogo-imagem {
+        max-width: 96vw;
         min-width: 0;
+        width: 96vw;
+        min-height: 220px;
+        height: auto;
+        display: block;
+        margin: 0 auto 12px auto;
+        object-fit: contain;
     }
     #dialogo-texto {
+        max-width: 98vw;
+        min-width: 0;
         max-height: 320px;
     }
 } 
