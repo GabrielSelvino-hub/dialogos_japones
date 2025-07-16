@@ -1,0 +1,8 @@
+A: Irasshaimase.
+B: Kore o kudasai.
+A: Hai. Atatamemasu ka?
+B: Hai, onegaishimasu.
+A: Fukuro wa irimasu ka?
+B:Iie, daijoubu desu.
+A: Gohyaku en desu.
+B: Arigatou gozaimasu. 

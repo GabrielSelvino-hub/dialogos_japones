@@ -1,0 +1,8 @@
+A: Bem-vindo(a).
+B: Quero este, por favor.
+A: Certo. Quer que eu esquente?
+B: Sim, por favor.
+A: Precisa de sacola?
+B: Não, está tranquilo.
+A: São 500 ienes.
+B: Muito obrigado(a). 
