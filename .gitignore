@@ -1,7 +1,3 @@
-# Arquivos de configuração sensíveis e gerados
-.env
-config.js
-
 # Dependências do Node.js
 node_modules/
 
