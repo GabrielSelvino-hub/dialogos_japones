@@ -1,19 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- DADOS DOS DIÁLOGOS (AGORA DINÂMICO) ---
-    const dialogos = [
-        {
-            nome: "Diálogo 001",
-            pasta: "dialogos/dialogo_001"
-        },
-        {
-            nome: "Diálogo 002",
-            pasta: "dialogos/dialogo_002"
-        }
-        // Adicione mais objetos de diálogo aqui conforme necessário
-    ];
+    // --- DADOS DOS DIÁLOGOS (AGORA VEM DA API) ---
+    // A constante 'dialogos' agora começa como um array vazio.
+    let dialogos = [];
 
-    // --- ELEMENTOS DA PÁGINA ---
+    // --- ELEMENTOS DA PÁGINA (continua igual) ---
     const navContainer = document.getElementById('navegacao-dialogos');
     const imgElement = document.getElementById('dialogo-imagem');
     const textElement = document.getElementById('dialogo-texto').querySelector('p');
@@ -21,52 +12,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAlternarJapones = document.getElementById('btn-alternar-japones');
     const containerPrincipal = document.getElementById('container-principal');
 
-    // --- ESTADO DA APLICAÇÃO ---
+    // --- ESTADO DA APLICAÇÃO (continua igual) ---
     let dialogoAtualIndex = -1;
-    let idiomaAtual = 'japones'; // 'traducao' ou 'japones'
-    let tipoJaponesAtual = 0; // 0: japones, 1: japones_sem_kanji, 2: romaji
+    let idiomaAtual = 'japones';
+    let tipoJaponesAtual = 0;
     const tiposJapones = ['japones', 'japones_sem_kanji', 'romaji'];
     const nomesTiposJapones = ['Kanji', 'Hiragana/Kana', 'Romaji'];
 
     // --- FUNÇÕES ---
 
     /**
-     * Função para carregar texto de arquivo .txt
+     * NOVA FUNÇÃO: Busca todos os diálogos da sua API no Azure.
      */
-    async function carregarTexto(pasta, tipo) {
+    async function carregarDialogosDaAPI() {
+        const apiUrl = window.API_URL;
+
         try {
-            const resposta = await fetch(`${pasta}/${tipo}.txt`);
-            if (!resposta.ok) throw new Error('Erro ao carregar arquivo');
-            return await resposta.text();
-        } catch (e) {
-            return '[Arquivo não encontrado]';
+            const resposta = await fetch(apiUrl);
+            if (!resposta.ok) {
+                throw new Error(`Erro ao buscar dados: ${resposta.statusText}`);
+            }
+            // A API retorna um array de objetos, que colocamos na nossa variável 'dialogos'
+            dialogos = await resposta.json();
+        } catch (error) {
+            console.error("Falha ao carregar diálogos da API:", error);
+            textElement.innerHTML = "Não foi possível carregar os diálogos. Tente novamente mais tarde.";
         }
     }
 
     /**
-     * Carrega e exibe um diálogo específico com base no seu índice.
+     * FUNÇÃO ATUALIZADA: Carrega um diálogo a partir dos dados já buscados.
      */
     async function carregarDialogo(index) {
-        if (index === dialogoAtualIndex) return; // Não recarrega o mesmo diálogo
+        if (index === dialogoAtualIndex || !dialogos[index]) return;
 
         dialogoAtualIndex = index;
         const dialogo = dialogos[index];
 
-        // Atualiza a imagem
-        imgElement.src = `${dialogo.pasta}/imagem.png`;
+        // Agora os dados vêm diretamente do objeto 'dialogo'
+        imgElement.src = dialogo.url_Img; // Use o nome da coluna do banco
         imgElement.alt = `Imagem para ${dialogo.nome}`;
 
-        // Reseta para o estado inicial (japonês com kanji)
+        // Mapeamos os textos para o formato que o resto do código espera
+        dialogo.textos = {
+            traducao: dialogo.traducao,
+            japones: dialogo.japones,
+            japones_sem_kanji: dialogo.japones_Sem_Kanji,
+            romaji: dialogo.romaji
+        };
+
         idiomaAtual = 'japones';
         tipoJaponesAtual = 0;
 
-        // Carrega todos os textos
-        dialogo.textos = {
-            traducao: await carregarTexto(dialogo.pasta, 'traducao'),
-            japones: await carregarTexto(dialogo.pasta, 'japones'),
-            japones_sem_kanji: await carregarTexto(dialogo.pasta, 'japones_sem_kanji'),
-            romaji: await carregarTexto(dialogo.pasta, 'romaji')
-        };
         atualizarTexto();
         atualizarBotoes();
         atualizarNavAtiva();
@@ -109,12 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             btnAlternarIdioma.textContent = 'Mostrar Tradução';
             btnAlternarJapones.classList.remove('hidden');
-            
+
             const proximoIndex = (tipoJaponesAtual + 1) % tiposJapones.length;
             btnAlternarJapones.textContent = `Alternar para ${nomesTiposJapones[proximoIndex]}`;
         }
     }
-    
+
     /**
      * Marca o link de navegação do diálogo atual como ativo.
      */
@@ -129,23 +126,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Preenche a barra de navegação superior com os diálogos disponíveis.
+     * FUNÇÃO ATUALIZADA: A navegação agora é populada com os dados da API.
      */
-    async function popularNavegacao() {
+    function popularNavegacao() {
         navContainer.innerHTML = '';
         dialogos.forEach((dialogo, index) => {
             const listItem = document.createElement('li');
             const link = document.createElement('a');
             link.href = '#';
-            // Criar miniatura da imagem
+
             const imgThumb = document.createElement('img');
-            imgThumb.src = `${dialogo.pasta}/imagem.png`;
+            imgThumb.src = dialogo.url_Img; // Use o nome da coluna do banco
             imgThumb.alt = dialogo.nome;
             imgThumb.className = 'miniatura-dialogo';
             link.appendChild(imgThumb);
-            link.addEventListener('click', async (e) => {
+
+            link.addEventListener('click', (e) => {
                 e.preventDefault();
-                await carregarDialogo(index);
+                carregarDialogo(index);
             });
             listItem.appendChild(link);
             navContainer.appendChild(listItem);
@@ -167,10 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- INICIALIZAÇÃO ---
-    popularNavegacao();
-    atualizarBotoes(); // Mostra os botões desde o início
-    // Se houver diálogos, já seleciona o primeiro
-    if (dialogos.length > 0) {
-        carregarDialogo(0);
+    // A inicialização agora chama a nova função da API
+    async function inicializarApp() {
+        await carregarDialogosDaAPI(); // Busca os dados primeiro
+        if (dialogos.length > 0) {
+            popularNavegacao(); // Popula a navegação com os dados recebidos
+            carregarDialogo(0); // Carrega o primeiro diálogo
+        }
+        atualizarBotoes();
     }
+
+    inicializarApp(); // Inicia a aplicação
+
 }); 
