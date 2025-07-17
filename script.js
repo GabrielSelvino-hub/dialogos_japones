@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAlternarIdioma = document.getElementById('btn-alternar-idioma');
     const btnAlternarJapones = document.getElementById('btn-alternar-japones');
     const containerPrincipal = document.getElementById('container-principal');
+    const btnMaximizar = document.getElementById('btn-maximizar-texto');
 
     // --- ESTADO DA APLICAÇÃO (continua igual) ---
     let dialogoAtualIndex = -1;
@@ -163,6 +164,19 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarTexto();
         atualizarBotoes();
     });
+
+    if (btnMaximizar && containerPrincipal) {
+        btnMaximizar.addEventListener('click', function() {
+            containerPrincipal.classList.toggle('maximizado');
+            if (containerPrincipal.classList.contains('maximizado')) {
+                btnMaximizar.title = 'Restaurar visualização';
+                btnMaximizar.innerText = '⤡';
+            } else {
+                btnMaximizar.title = 'Maximizar texto';
+                btnMaximizar.innerText = '⤢';
+            }
+        });
+    }
 
     // --- INICIALIZAÇÃO ---
     // A inicialização agora chama a nova função da API
