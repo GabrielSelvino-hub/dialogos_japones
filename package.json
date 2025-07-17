@@ -1,0 +1,8 @@
+{
+  "name": "dialogos-japones",
+  "version": "1.0.0",
+  "scripts": {
+    "postbuild": "node generate-config.js"
+  },
+  "dependencies": {}
+} 
