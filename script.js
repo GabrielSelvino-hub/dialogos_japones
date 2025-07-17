@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * NOVA FUNÇÃO: Busca todos os diálogos da sua API no Azure.
      */
     async function carregarDialogosDaAPI() {
-        const apiUrl = 'https://dialogos-japones-api.azurewebsites.net/api/dialogos';
+        const apiUrl = 'https://dialogojpapi-a6addyercbgxenej.brazilsouth-01.azurewebsites.net/api/dialogos';
 
         try {
             const resposta = await fetch(apiUrl);
