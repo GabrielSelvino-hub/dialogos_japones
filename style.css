@@ -114,6 +114,7 @@ header {
     /* Scrollbar estilizada */
     scrollbar-width: thin;
     scrollbar-color: #444 #232526;
+    position: relative;
 }
 #dialogo-texto br {
     display: block;
@@ -174,6 +175,28 @@ header {
     color: #fff;
 }
 
+#btn-maximizar-texto {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    background: rgba(40,40,40,0.45);
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+#btn-maximizar-texto:hover {
+    background: rgba(40,40,40,0.7);
+}
+
 .hidden {
     display: none !important;
 }
@@ -199,6 +222,121 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.maximizado #dialogo-imagem {
+    display: none !important;
+}
+.maximizado #dialogo-texto {
+    max-width: 98vw !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-height: none !important;
+    min-height: 220px !important;
+    font-size: 1.25rem !important;
+    padding: 32px 8vw !important;
+    border-radius: 14px !important;
+}
+
+.maximizado #controles {
+    position: fixed;
+    left: 0;
+    bottom: 4%;
+    width: 100vw;
+    background: rgba(30,32,34,0.98);
+    z-index: 100;
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0 12px 0;
+}
+.maximizado #container-principal {
+    padding-bottom: 64px !important;
+}
+.maximizado #dialogo-texto {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 64px - 4vh) !important;
+}
+
+.maximizado {
+    height: 100vh;
+    overflow: hidden;
+}
+.maximizado #container-principal {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-width: 100vw;
+    margin: 0 auto 0 auto;
+    padding-bottom: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.maximizado .conteudo-dialogo {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 100vw;
+    gap: 0;
+}
+.maximizado #dialogo-texto {
+    flex: 1 1 auto;
+    overflow-y: auto !important;
+    max-height: none !important;
+    min-height: 0;
+    margin-bottom: 0;
+    border-radius: 12px 12px 0 0;
+}
+.maximizado #controles {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    background: rgba(30,32,34,0.98);
+    z-index: 100;
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0 12px 0;
+}
+.maximizado header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 200;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+.maximizado nav {
+    width: 100vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.maximizado #navegacao-dialogos {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    max-width: 100vw;
+    width: 100vw;
+    margin: 0 auto;
+    scrollbar-width: thin;
+    scrollbar-color: #444 #232526;
+}
+.maximizado #navegacao-dialogos li {
+    flex: 0 0 auto;
+}
+.maximizado #container-principal {
+    padding-top: 64px !important;
 }
 
 @media (max-width: 1200px) {
@@ -236,5 +374,74 @@ header {
         max-width: 98vw;
         min-width: 0;
         max-height: 320px;
+    }
+}
+
+@media (max-width: 600px) {
+    #container-principal {
+        padding: 20px 4px;
+        margin: 10px 0 0 0;
+        border-radius: 10px;
+        gap: 18px;
+    }
+    .conteudo-dialogo {
+        flex-direction: column;
+        gap: 14px;
+        max-width: 100vw;
+        align-items: stretch;
+    }
+    #dialogo-imagem {
+        max-width: 98vw;
+        width: 100%;
+        min-width: 0;
+        min-height: 120px;
+        border-radius: 8px;
+    }
+    #dialogo-texto {
+        padding: 16px 8px;
+        font-size: 1rem;
+        min-height: 120px;
+        max-height: 200px;
+        border-radius: 8px;
+    }
+    #controles {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    #controles button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px 0;
+    }
+    #navegacao-dialogos {
+        gap: 6px;
+        padding: 0 2px;
+    }
+    #navegacao-dialogos li a {
+        font-size: 0.95rem;
+        padding: 4px 2px;
+    }
+    .miniatura-dialogo {
+        width: 80px;
+        height: 50px;
+        border-radius: 6px;
+    }
+    .maximizado #dialogo-texto {
+        padding: 16px 2vw !important;
+        font-size: 1.08rem !important;
+    }
+}
+@media (max-width: 700px) {
+    .maximizado #controles {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px 0 8px 0;
+    }
+    .maximizado #container-principal {
+        max-width: 100vw;
+    }
+    .maximizado #container-principal {
+        padding-top: 56px !important;
     }
 } 
