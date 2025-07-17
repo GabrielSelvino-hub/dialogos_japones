@@ -4,5 +4,7 @@
   "scripts": {
     "postbuild": "node generate-config.js"
   },
-  "dependencies": {}
-} 
+  "dependencies": {
+    "dotenv": "^17.2.0"
+  }
+}

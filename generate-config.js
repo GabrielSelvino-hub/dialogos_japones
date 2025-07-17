@@ -1,4 +1,5 @@
 // generate-config.js
+require('dotenv').config();
 const fs = require('fs');
 const apiUrl = process.env.API_URL;
 
